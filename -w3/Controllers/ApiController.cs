@@ -39,6 +39,15 @@ namespace cwiczenia3.Controllers
 
         }
 
+       [HttpPost]
+
+       public IActionResult CreateStudent (Student student){
+
+            //...ad to database
+            //... generating index numebr
+            student.IndexNumber = $"s{new Random().Next(1,20000)}";
+        }
+
         
     }
 }
