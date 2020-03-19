@@ -16,5 +16,29 @@ namespace cwiczenia3.Controllers
         {
             return "Kowalski, Malewski, Andrzejewski";
         }
+
+        [HttpGet("{id}")]
+
+        public IActionResult GetStudent(int id)
+        {
+            if (id == 1)
+            {
+                return Ok("Kowalski");
+            } else if (id == 2)
+            {
+                return Ok("Malewski");
+            }
+            return NotFound("Nie znaleziono studenta");
+        }
+
+        [HttpGet]
+
+        public string GetStudents(string orderby)
+        {
+            return $"Kowalski, Malewski, Andrzejewski sortowanie={orderby}";
+
+        }
+
+        
     }
 }
