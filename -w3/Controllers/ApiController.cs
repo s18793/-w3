@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using cwiczenia3.NewFolder;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace cwiczenia3.Controllers
 {
     [ApiController]
     [Route("api/students")]
 
-    public class StudentsController : ControllerBase
+    public class StudentsController : ControllerBase 
     {
         public string GetStudent()
         {
@@ -28,10 +26,10 @@ namespace cwiczenia3.Controllers
             {
                 return Ok("Malewski");
             }
-            return NotFound("Nie znaleziono studenta");
+            return NotFound("No Student Find");
         }
 
-        [HttpGet]
+        [HttpGet] 
 
         public string GetStudents(string orderby)
         {
@@ -41,13 +39,25 @@ namespace cwiczenia3.Controllers
 
        [HttpPost]
 
-       public IActionResult CreateStudent (Student student){
+        public IActionResult CreateStudent(Student student)
+        {
 
-            //...ad to database
-            //... generating index numebr
+           
             student.IndexNumber = $"s{new Random().Next(1,20000)}";
+             return Ok(student);
         }
 
-        
+        [HttpPut]
+        public IActionResult PutStudent(int id)
+        {
+            return Ok($"Aktualizacja dokonczona {id}");
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteStudent(int id)
+        {
+            return Ok($"Usuwanie ukończone {id}");
+        }
+
     }
 }
