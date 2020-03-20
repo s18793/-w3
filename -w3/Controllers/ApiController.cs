@@ -2,6 +2,7 @@
 using cwiczenia3.NewFolder;
 using Microsoft.AspNetCore.Mvc;
 
+using _w3.DAL;
 
 namespace cwiczenia3.Controllers
 {
@@ -10,34 +11,20 @@ namespace cwiczenia3.Controllers
 
     public class StudentsController : ControllerBase 
     {
-        public string GetStudent()
+        private readonly IDbService _dbService;
+
+        public StudentsController(IDbService dbService)
         {
-            return "Kowalski, Malewski, Andrzejewski";
-        }
-
-        [HttpGet("{id}")]
-
-        public IActionResult GetStudent(int id)
-        {
-            if (id == 1)
-            {
-                return Ok("Kowalski");
-            } else if (id == 2)
-            {
-                return Ok("Malewski");
-            }
-            return NotFound("No Student Find");
-        }
-
-        [HttpGet] 
-
-        public string GetStudents(string orderby)
-        {
-            return $"Kowalski, Malewski, Andrzejewski sortowanie={orderby}";
+            _dbService = dbService;
 
         }
+        [HttpGet]
+        public IActionResult getStudents(String orderBy)
+        {
+            return Ok(_dbService.GetStudents());
+        }
 
-       [HttpPost]
+        [HttpPost]
 
         public IActionResult CreateStudent(Student student)
         {
@@ -57,6 +44,12 @@ namespace cwiczenia3.Controllers
         public IActionResult DeleteStudent(int id)
         {
             return Ok($"Usuwanie ukończone {id}");
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult getStudent(int id)
+        {
+            return Ok(_dbService);
         }
 
     }
